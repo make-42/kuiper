@@ -10,7 +10,7 @@
 [![Build Status](https://travis-ci.org/go-vgo/robotgo.svg)](https://travis-ci.org/go-vgo/robotgo)
 ![Appveyor](https://ci.appveyor.com/api/projects/status/github/go-vgo/robotgo?branch=master&svg=true)
 [![Go Report Card](https://goreportcard.com/badge/github.com/go-vgo/robotgo)](https://goreportcard.com/report/github.com/go-vgo/robotgo)
-[![GoDoc](https://pkg.go.dev/badge/github.com/go-vgo/robotgo?status.svg)](https://pkg.go.dev/github.com/go-vgo/robotgo?tab=doc)
+[![GoDoc](https://godoc.org/github.com/go-vgo/robotgo?status.svg)](https://godoc.org/github.com/go-vgo/robotgo)
 [![GitHub release](https://img.shields.io/github/release/go-vgo/robotgo.svg)](https://github.com/go-vgo/robotgo/releases/latest)
 [![Join the chat at https://gitter.im/go-vgo/robotgo](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/go-vgo/robotgo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -62,7 +62,7 @@ GCC
 
 #### For MacOS:
 
-Xcode Command Line Tools (And Privacy setting: [#277](https://github.com/go-vgo/robotgo/issues/277))
+Xcode Command Line Tools (And Privacy setting: [#277](https://github.com/go-vgo/robotgo/issues/277) )
 
 ```
 xcode-select --install
@@ -70,12 +70,12 @@ xcode-select --install
 
 #### For Windows:
 
-[MinGW-w64](https://sourceforge.net/projects/mingw-w64/files) (Use recommended) or others Mingw [llvm-mingw](https://github.com/mstorsjo/llvm-mingw);
+[MinGW-w64](https://sourceforge.net/projects/mingw-w64/files) (Use recommended)
 
 Download the Mingw, then set system environment variables `C:\mingw64\bin` to the Path.
 [Set environment variables to run GCC from command line](https://www.youtube.com/results?search_query=Set+environment+variables+to+run+GCC+from+command+line).
 
-`Or the other GCC` (But you should compile the "libpng" with yourself when use the [bitmap](https://github.com/vcaesar/bitmap).)
+`Or the other GCC (But you should compile the "libpng" with yourself when use the bitmap.)`
 
 #### For everything else:
 
@@ -87,9 +87,9 @@ X11 with the XTest extension (the Xtst library)
 "Clipboard": xsel xclip
 
 
-"Bitmap": libpng (Just used by the "bitmap".)
+"Bitmap": libpng (Just used by the bitmap.)
 
-"Event-Gohook": xcb, xkb, libxkbcommon (Just used by the "hook".)
+"Event": xcb, xkb, libxkbcommon (Just used by the hook.)
 
 ```
 
@@ -109,7 +109,7 @@ sudo apt install xsel xclip
 # Bitmap
 sudo apt install libpng++-dev
 
-# GoHook
+# Hook
 sudo apt install xcb libxcb-xkb-dev x11-xkb-utils libx11-xcb-dev libxkbcommon-x11-dev libxkbcommon-dev
 
 ```
@@ -127,7 +127,7 @@ sudo dnf install xsel xclip
 # Bitmap
 sudo dnf install libpng-devel
 
-# GoHook
+# Hook
 sudo dnf install libxkbcommon-devel libxkbcommon-x11-devel xorg-x11-xkb-utils-devel
 
 ```
@@ -268,18 +268,13 @@ func main() {
   num := robotgo.DisplaysNum()
   for i := 0; i < num; i++ {
     robotgo.DisplayID = i
-    img1, _ := robotgo.CaptureImg()
+    img1 := robotgo.CaptureImg()
     path1 := "save_" + strconv.Itoa(i)
     robotgo.Save(img1, path1+".png")
     robotgo.SaveJpeg(img1, path1+".jpeg", 50)
 
-    img2, _ := robotgo.CaptureImg(10, 10, 20, 20)
+    img2 := robotgo.CaptureImg(10, 10, 20, 20)
     robotgo.Save(img2, "test_"+strconv.Itoa(i)+".png")
-
-    x, y, w, h := robotgo.GetDisplayBounds(i)
-		img3, err := robotgo.CaptureImg(x, y, w, h)
-		fmt.Println("Capture error: ", err)
-		robotgo.Save(img3, path1+"_1.png")
   }
 }
 ```
@@ -359,8 +354,8 @@ func opencv() {
   // bit1 := robotgo.CaptureScreen(10, 10, 30, 30)
   // img1 := robotgo.ToImage(bit1)
   // defer robotgo.FreeBitmapArr(bit0, bit1)
-  img, _ := robotgo.CaptureImg()
-  img1, _ := robotgo.CaptureImg(10, 10, 30, 30)
+  img := robotgo.CaptureImg()
+  img1 := robotgo.CaptureImg(10, 10, 30, 30)
 
   fmt.Print("gcv find image: ")
   fmt.Println(gcv.FindImg(img1, img))

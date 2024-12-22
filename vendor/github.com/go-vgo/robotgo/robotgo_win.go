@@ -17,8 +17,7 @@ import (
 	"syscall"
 	"unsafe"
 
-	// "github.com/lxn/win"
-	"github.com/tailscale/win"
+	"github.com/lxn/win"
 )
 
 // FindWindow find window hwnd by name
@@ -58,7 +57,7 @@ func SetForeg(hwnd win.HWND) bool {
 	return win.SetForegroundWindow(hwnd)
 }
 
-// GetMain get the main display hwnd
+// GetMian get the main display hwnd
 func GetMain() win.HWND {
 	return win.GetActiveWindow()
 }

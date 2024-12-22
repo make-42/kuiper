@@ -190,7 +190,7 @@ func DisplaysNum() int {
 	return int(reply.Number)
 }
 
-// GetMainId get the main display id
+// GetMianId get the main display id
 func GetMainId() int {
 	conn, err := xgb.NewConn()
 	if err != nil {

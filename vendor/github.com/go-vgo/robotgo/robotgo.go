@@ -33,10 +33,6 @@ package robotgo
 #cgo darwin CFLAGS: -x objective-c -Wno-deprecated-declarations
 #cgo darwin LDFLAGS: -framework Cocoa -framework OpenGL -framework IOKit
 #cgo darwin LDFLAGS: -framework Carbon -framework CoreFoundation
-//
-#if __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ > MAC_OS_VERSION_14_4
-#cgo darwin LDFLAGS: -framework ScreenCaptureKit
-#endif
 
 #cgo linux CFLAGS: -I/usr/src
 #cgo linux LDFLAGS: -L/usr/src -lm -lX11 -lXtst
@@ -50,7 +46,6 @@ package robotgo
 import "C"
 
 import (
-	"errors"
 	"image"
 	"runtime"
 	"time"
@@ -91,8 +86,6 @@ type (
 	CHex C.MMRGBHex
 	// CBitmap define CBitmap as C.MMBitmapRef type
 	CBitmap C.MMBitmapRef
-	// Handle define window Handle as C.MData type
-	Handle C.MData
 )
 
 // Bitmap define the go Bitmap struct
@@ -366,15 +359,12 @@ func CaptureGo(args ...int) Bitmap {
 	return ToBitmap(bit)
 }
 
-// CaptureImg capture the screen and return image.Image, error
-func CaptureImg(args ...int) (image.Image, error) {
+// CaptureImg capture the screen and return image.Image
+func CaptureImg(args ...int) image.Image {
 	bit := CaptureScreen(args...)
-	if bit == nil {
-		return nil, errors.New("Capture image not found.")
-	}
 	defer FreeBitmap(bit)
 
-	return ToImage(bit), nil
+	return ToImage(bit)
 }
 
 // FreeBitmap free and dealloc the C bitmap
@@ -461,11 +451,6 @@ func GetXDisplayName() string {
 	C.free(unsafe.Pointer(name))
 
 	return gname
-}
-
-// CloseMainDisplay close the main X11 display
-func CloseMainDisplay() {
-	C.close_main_display()
 }
 
 // Deprecated: use the ScaledF(),
@@ -555,6 +540,8 @@ func Drag(x, y int, args ...string) {
 //
 //	robotgo.DragSmooth(10, 10)
 func DragSmooth(x, y int, args ...interface{}) {
+	x, y = MoveScale(x, y)
+
 	Toggle("left")
 	MilliSleep(50)
 	MoveSmooth(x, y, args...)
@@ -881,22 +868,12 @@ func IsValid() bool {
 }
 
 // SetActive set the window active
-func SetActive(win Handle) {
-	SetActiveC(C.MData(win))
-}
-
-// SetActiveC set the window active
-func SetActiveC(win C.MData) {
+func SetActive(win C.MData) {
 	C.set_active(win)
 }
 
 // GetActive get the active window
-func GetActive() Handle {
-	return Handle(GetActiveC())
-}
-
-// GetActiveC get the active window
-func GetActiveC() C.MData {
+func GetActive() C.MData {
 	mdata := C.get_active()
 	// fmt.Println("active----", mdata)
 	return mdata
@@ -970,29 +947,8 @@ func SetHandlePid(pid int, args ...int) {
 	C.set_handle_pid_mData(C.uintptr(pid), C.int8_t(isPid))
 }
 
-// GetHandById get handle mdata by id
-func GetHandById(id int, args ...int) Handle {
-	isPid := 1
-	if len(args) > 0 {
-		isPid = args[0]
-	}
-	return GetHandByPid(id, isPid)
-}
-
-// GetHandByPid get handle mdata by pid
-func GetHandByPid(pid int, args ...int) Handle {
-	return Handle(GetHandByPidC(pid, args...))
-}
-
-// Deprecated: use the GetHandByPid(),
-//
 // GetHandPid get handle mdata by pid
-func GetHandPid(pid int, args ...int) Handle {
-	return GetHandByPid(pid, args...)
-}
-
-// GetHandByPidC get handle mdata by pid
-func GetHandByPidC(pid int, args ...int) C.MData {
+func GetHandPid(pid int, args ...int) C.MData {
 	var isPid int
 	if len(args) > 0 || NotPid {
 		isPid = 1

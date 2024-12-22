@@ -4,14 +4,13 @@ go 1.23.2
 
 require (
 	github.com/fsnotify/fsnotify v1.8.0
-	github.com/go-vgo/robotgo v0.110.4
+	github.com/go-vgo/robotgo v0.110.0
 	github.com/hajimehoshi/ebiten/v2 v2.8.5
 	github.com/kirsle/configdir v0.0.0-20170128060238-e45d2f54772f
 	gopkg.in/yaml.v2 v2.4.0
 )
 
 require (
-	github.com/dblohm7/wingoes v0.0.0-20240820181039-f2b84150679e // indirect
 	github.com/ebitengine/gomobile v0.0.0-20240911145611-4856209ac325 // indirect
 	github.com/ebitengine/hideconsole v1.0.0 // indirect
 	github.com/ebitengine/purego v0.8.0 // indirect
@@ -29,7 +28,6 @@ require (
 	github.com/robotn/xgb v0.10.0 // indirect
 	github.com/robotn/xgbutil v0.10.0 // indirect
 	github.com/shirou/gopsutil/v4 v4.24.9 // indirect
-	github.com/tailscale/win v0.0.0-20240926211701-28f7e73c7afb // indirect
 	github.com/tklauser/go-sysconf v0.3.14 // indirect
 	github.com/tklauser/numcpus v0.9.0 // indirect
 	github.com/vcaesar/gops v0.40.0 // indirect
@@ -37,7 +35,6 @@ require (
 	github.com/vcaesar/keycode v0.10.1 // indirect
 	github.com/vcaesar/tt v0.20.1 // indirect
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
-	golang.org/x/exp v0.0.0-20241004190924-225e2abe05e6 // indirect
 	golang.org/x/image v0.21.0 // indirect
 	golang.org/x/net v0.33.0 // indirect
 	golang.org/x/sync v0.10.0 // indirect
