@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"kuiper/config"
 	"kuiper/fonts"
 	"kuiper/layout"
@@ -31,7 +32,7 @@ func (g *Game) Update() error {
 	}
 	if len(g.filtered) >= config.Config.WidthLevels+config.Config.HeightLevels {
 		x, y := layout.StringToPosition(g.filtered)
-		log.Printf("%d %d", int((x+1/float64(utils.PowInts(layout.Chars, config.Config.WidthLevels))/2)*float64(config.Config.WindowWidth)), int((y+1/float64(utils.PowInts(layout.Chars, config.Config.HeightLevels))/2)*float64(config.Config.WindowHeight)))
+		fmt.Printf("%d %d", int((x+1/float64(utils.PowInts(layout.Chars, config.Config.WidthLevels))/2)*float64(config.Config.WindowWidth)), int((y+1/float64(utils.PowInts(layout.Chars, config.Config.HeightLevels))/2)*float64(config.Config.WindowHeight)))
 		//robotgo.Move(int((x+1/float64(utils.PowInts(layout.Chars, config.Config.WidthLevels))/2)*float64(config.Config.WindowWidth)), int((y+1/float64(utils.PowInts(layout.Chars, config.Config.HeightLevels))/2)*float64(config.Config.WindowHeight)))
 		os.Exit(1)
 	}
