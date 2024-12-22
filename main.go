@@ -10,7 +10,6 @@ import (
 	"os"
 	"strings"
 
-	"github.com/go-vgo/robotgo"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
@@ -32,8 +31,8 @@ func (g *Game) Update() error {
 	}
 	if len(g.filtered) >= config.Config.WidthLevels+config.Config.HeightLevels {
 		x, y := layout.StringToPosition(g.filtered)
-		//log.Printf("%f,%f\n", (x+1/float64(utils.PowInts(layout.Chars, config.Config.WidthLevels))/2)*float64(config.Config.WindowWidth), (y+1/float64(utils.PowInts(layout.Chars, config.Config.HeightLevels))/2)*float64(config.Config.WindowHeight))
-		robotgo.Move(int((x+1/float64(utils.PowInts(layout.Chars, config.Config.WidthLevels))/2)*float64(config.Config.WindowWidth)), int((y+1/float64(utils.PowInts(layout.Chars, config.Config.HeightLevels))/2)*float64(config.Config.WindowHeight)))
+		log.Printf("%d %d", int((x+1/float64(utils.PowInts(layout.Chars, config.Config.WidthLevels))/2)*float64(config.Config.WindowWidth)), int((y+1/float64(utils.PowInts(layout.Chars, config.Config.HeightLevels))/2)*float64(config.Config.WindowHeight)))
+		//robotgo.Move(int((x+1/float64(utils.PowInts(layout.Chars, config.Config.WidthLevels))/2)*float64(config.Config.WindowWidth)), int((y+1/float64(utils.PowInts(layout.Chars, config.Config.HeightLevels))/2)*float64(config.Config.WindowHeight)))
 		os.Exit(1)
 	}
 	return nil
