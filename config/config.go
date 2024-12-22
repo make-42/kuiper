@@ -44,6 +44,7 @@ var Config ConfigS
 var AccentColor color.RGBA
 var FirstColor color.RGBA
 var ThirdColorAdj color.RGBA
+var BorderColor color.RGBA
 
 var watcher *fsnotify.Watcher
 
@@ -109,6 +110,7 @@ func Init() {
 func updatePywalColors() {
 	walPath := configdir.LocalCache("wal")
 	walFile := filepath.Join(walPath, "colors")
+	BorderColor = color.RGBA{255, 255, 255, Config.LineOpacity}
 	if _, err := os.Stat(walFile); os.IsNotExist(err) {
 		AccentColor = color.RGBA{255, 120, 130, Config.LineOpacity}
 		FirstColor = color.RGBA{255, 255, 255, Config.LineOpacity}

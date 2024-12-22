@@ -71,7 +71,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		op.GeoM.Translate(float64(bx)+float64(box_width)/2-t_width/2, float64(by)+float64(box_height)/2-t_height/2)
 		op.ColorScale.ScaleWithColor(config.AccentColor)
 		text.Draw(screen, characters, layout.TFace, op)
-		vector.StrokeRect(screen, bx, by, float32(box_width), float32(box_height), 1, config.FirstColor, true)
+		vector.StrokeRect(screen, bx, by, float32(box_width), float32(box_height), 1, config.BorderColor, true)
 	}
 }
 
