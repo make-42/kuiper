@@ -4,7 +4,7 @@ go 1.23.2
 
 require (
 	github.com/fsnotify/fsnotify v1.8.0
-	github.com/go-vgo/robotgo v0.110.5
+	github.com/go-vgo/robotgo v0.110.4
 	github.com/hajimehoshi/ebiten/v2 v2.8.5
 	github.com/kirsle/configdir v0.0.0-20170128060238-e45d2f54772f
 	gopkg.in/yaml.v2 v2.4.0

@@ -49,8 +49,8 @@ github.com/go-text/typesetting/language
 github.com/go-text/typesetting/segmenter
 github.com/go-text/typesetting/shaping
 github.com/go-text/typesetting/unicodedata
-# github.com/go-vgo/robotgo v0.110.5
-## explicit; go 1.22.0
+# github.com/go-vgo/robotgo v0.110.4
+## explicit; go 1.22
 github.com/go-vgo/robotgo
 github.com/go-vgo/robotgo/clipboard
 # github.com/godbus/dbus/v5 v5.1.0
